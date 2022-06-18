@@ -32,8 +32,8 @@ pipeline {
 stage('Production') {
   steps {
     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'cicd-jenkins-project', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY', region:'sa-east-1']]) {
-    s3Delete(bucket: 'cicd-jenkins-project', path:'**/*', region:'sa-east-1')
-    s3Upload(bucket: 'cicd-jenkins-project', workingDir:'build', includePathPattern:'**/*', region:'sa-east-1');
+    s3Delete(bucket: 'cicd-jenkins-project', path:'**/*')
+    s3Upload(bucket: 'cicd-jenkins-project', workingDir:'build', includePathPattern:'**/*');
             }
           }
         }
