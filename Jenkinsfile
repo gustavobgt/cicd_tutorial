@@ -31,7 +31,7 @@ pipeline {
 
 stage('Production') {
   steps {
-    withAWS(region:'sa-east-1',credentials:'CREDENTIALS_FROM_JENKINS_SETUP') {
+    withAWS(region:'sa-east-1',credentials:'cicd-jenkins-project') {
     s3Delete(bucket: 'sa-east-1', path:'**/*')
     s3Upload(bucket: 'sa-east-1', workingDir:'build', includePathPattern:'**/*');
             }
