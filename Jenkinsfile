@@ -31,7 +31,7 @@ pipeline {
 
 stage('Production') {
   steps {
-    withAWS(region:'sa-east-1',credentials:'AKIA4XMB2GN3ULMDKF4J') {
+    withAWS(region:'sa-east-1',credentials:'adb3f0d2-819c-4659-943f-96155731bd1c') {
     s3Delete(bucket: 'sa-east-1', path:'**/*')
     s3Upload(bucket: 'sa-east-1', workingDir:'build', includePathPattern:'**/*');
             }
