@@ -6,6 +6,7 @@ pipeline {
         }
     }
     environment {
+        HOME = '.'
         CI = 'true'
         FIREBASE_DEPLOY_TOKEN = credentials('firebase-deploy-token')
     }
