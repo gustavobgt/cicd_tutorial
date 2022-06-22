@@ -19,7 +19,7 @@ pipeline {
       parallel {
         stage('Run Tests') {
           steps {
-            sh './jenkins/scripts/test.sh'
+            sh 'npm run test'
           }
         }
         stage('Create Build Artifacts') {
@@ -32,7 +32,8 @@ pipeline {
 
     stage('Staging') {
       steps {
-        sh './jenkins/scripts/staging.sh'
+        sh 'npm install -g firebase-tools'
+        sh 'firebase deploy -P staging --token "$FIREBASE_DEPLOY_TOKEN"'
         input message: 'Finished using the Staging version of the Web App ? (Click "Proceed" to continue)'
       }
     }
