@@ -7,9 +7,10 @@ pipeline {
     }
     environment {
         CI = 'true'
+        FIREBASE_DEPLOY_TOKEN = credentials('firebase-deploy-token')
     }
     stages {
-    stage('Install Packages') {
+    stage('Build') {
       steps {
         sh 'npm install'
       }
@@ -18,7 +19,7 @@ pipeline {
       parallel {
         stage('Run Tests') {
           steps {
-            sh 'npm run test'
+            sh './jenkins/scripts/test.sh'
           }
         }
         stage('Create Build Artifacts') {
@@ -26,6 +27,13 @@ pipeline {
             sh 'npm run build'
           }
         }
+      }
+    }
+
+    stage('Staging') {
+      steps {
+        sh './jenkins/scripts/staging.sh'
+        input message: 'Finished using the Staging version of the Web App ? (Click "Proceed" to continue)'
       }
     }
 
