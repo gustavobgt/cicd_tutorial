@@ -6,7 +6,6 @@ pipeline {
         }
     }
     environment {
-        HOME = '.'
         CI = 'true'
         FIREBASE_DEPLOY_TOKEN = credentials('firebase-deploy-token')
     }
@@ -33,7 +32,7 @@ pipeline {
 
     stage('Staging') {
       steps {
-        sh 'npm install -g firebase-tools'
+        sh 'sudo npm install -g firebase-tools'
         sh 'firebase deploy -P staging --token "$FIREBASE_DEPLOY_TOKEN"'
         input message: 'Finished using the Staging version of the Web App ? (Click "Proceed" to continue)'
       }
