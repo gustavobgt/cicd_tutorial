@@ -1,11 +1,11 @@
 pipeline {
     agent {
         docker {
-            image 'node:16.15.0-buster-slim' 
-            args '-p 3000:3000' 
+      image 'node:16.15.0-buster-slim'
+      args '-p 3000:3000'
         }
     }
-    environment { 
+    environment {
         CI = 'true'
     }
     stages {
@@ -29,13 +29,13 @@ pipeline {
       }
     }
 
-stage('Production') {
-  steps {
-    withAWS(region:'sa-east-1',credentials:'cicd-jenkins-project') {
-    s3Delete(bucket: 'cicd-jenkins-project', path:'**/*')
-    s3Upload(bucket: 'cicd-jenkins-project', workingDir:'build', includePathPattern:'**/*');
-            }
-          }
+    stage('Production') {
+      steps {
+        withAWS(region:'sa-east-1', credentials:'cicd-jenkins-project') {
+          s3Delete(bucket: 'cicd-jenkins-project', path:'**/*')
+          s3Upload(bucket: 'cicd-jenkins-project', workingDir:'build', includePathPattern:'**/*')
         }
+      }
+    }
     }
 }
