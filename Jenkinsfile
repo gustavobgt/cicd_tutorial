@@ -1,8 +1,8 @@
 pipeline {
     agent {
         docker {
-      image 'node:16.15.0-buster-slim'
-      args '-p 3000:3000'
+            image 'node:16.15.0-buster-slim'
+            args '-p 3000:3000'
         }
     }
     environment {
@@ -10,11 +10,12 @@ pipeline {
         FIREBASE_DEPLOY_TOKEN = credentials('firebase-deploy-token')
     }
     stages {
-    stage('Build') {
+    stage('Install Packages') {
       steps {
         sh 'npm install'
       }
     }
+    
     stage('Test and Build') {
       parallel {
         stage('Run Tests') {
