@@ -18,7 +18,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false",
+    "test:watch": "react-scripts test",
+    "test:unit": "react-scripts test --testPathPattern=unit\\.spec\\.jsx$ --watchAll=false",
+    "test:integration": "react-scripts test --testPathPattern=int\\.spec\\.jsx$ --watchAll=false",
     "eject": "react-scripts eject",
     "deploy": "aws s3 sync build/ s3://cicd-jenkins-project --acl public-read"
   },

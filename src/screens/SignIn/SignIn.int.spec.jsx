@@ -9,6 +9,6 @@ test("<SignIn />", () => {
       <SignIn />
     </ThemeProvider>
   );
-  const linkElement = screen.getByText(/Sign In/i);
+  const linkElement = screen.getByText(/Sign in Screen/i);
   expect(linkElement).toBeInTheDocument();
 });
