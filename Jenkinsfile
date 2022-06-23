@@ -18,9 +18,14 @@ pipeline {
     
     stage('Test and Build') {
       parallel {
-        stage('Run Tests') {
+        stage('Run Unit Tests') {
           steps {
-            sh 'npm run test'
+            sh 'npm run test:unit'
+          }
+        }
+        stage('Run Integration Tests') {
+          steps {
+            sh 'npm run test:integration'
           }
         }
         stage('Create Build Artifacts') {
